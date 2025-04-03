@@ -187,7 +187,7 @@ paths:
               example:
                 status_code: 2001
                 status_msg: system error
-  /news/info/{id}:
+  /news/v1/wire/info/{id}:
     get:
       tags:
         - News
