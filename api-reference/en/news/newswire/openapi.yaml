@@ -1,0 +1,193 @@
+openapi: 3.0.0
+info:
+  title: Newswire OpenAPI
+  description: 'Newswire API Interface'
+  version: 1.0.0
+servers:
+  - url: https://open.ainvest.com/open
+    description: Production environment server
+  - url: https://ainvest-api.touzime.com/open
+    description: Test environment server
+security:
+  - bearerAuth: []
+paths:
+  /news/v1/wire/page:
+    get:
+      summary: Get Paginated News Updates
+      description: 'Retrieve a paginated list of recent newswire items through this interface.'
+      operationId: getNewsPage
+      parameters:
+        - name: tab
+          in: query
+          required: true
+          description: Options include pro (paid content), latest (full content), markets, stock_ideas, economy, pre_market, earningscall
+          schema:
+            type: string
+          example: latest
+        - name: start_id
+          in: query
+          required: false
+          description: Start ID
+          schema:
+            type: string
+          example: '1'
+        - name: size
+          in: query
+          required: true
+          description: Size
+          schema:
+            type: integer
+            format: int32
+          example: 10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NewsPageResponseCopy'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    NewsPageResponseCopy:
+      type: object
+      properties:
+        data:
+          type: object
+          description: Data
+          properties:
+            page:
+              type: number
+              description: Current Page
+            size:
+              type: number
+              description: Page Size
+            data:
+              type: array
+              description: Data
+              items:
+                type: object
+                required:
+                  - news_id
+                  - content_id
+                  - news_type
+                  - news_from
+                  - news_format
+                  - news_important
+                  - publish_time
+                  - title
+                  - summary
+                  - content
+                  - source
+                  - seo_key
+                  - cover_image
+                  - source_url
+                  - tag_list
+                  - lang
+                  - read_time
+                properties:
+                  news_id:
+                    type: string
+                    description: Content ID
+                  content_id:
+                    type: string
+                    description: Content Platform ID
+                  news_type:
+                    type: string
+                    description: Content Type
+                  news_from:
+                    type: string
+                    description: Content Generation Source
+                  news_format:
+                    type: string
+                    description: Content Format
+                  news_important:
+                    type: number
+                    description: Content Importance Level
+                  publish_time:
+                    type: number
+                    description: Content Publication Time
+                  title:
+                    type: string
+                    description: Content Title
+                  summary:
+                    type: string
+                    description: Content Summary
+                  content:
+                    type: string
+                    description: Content Body
+                  source:
+                    type: string
+                    description: Source
+                  seo_key:
+                    type: string
+                    description: Content SEO Key
+                  cover_image:
+                    type: object
+                    description: Content Cover Image
+                    properties:
+                      src:
+                        type: string
+                        description: Link
+                      type:
+                        type: string
+                        description: Type
+                  source_url:
+                    type: string
+                    description: Content Redirect URL
+                  tag_list:
+                    type: array
+                    description: Content Tag List
+                    items:
+                      type: object
+                      required:
+                        - code
+                        - market
+                        - name_en
+                        - type
+                      properties:
+                        code:
+                          type: string
+                          description: Code
+                        market:
+                          type: string
+                          description: Market
+                        name_en:
+                          type: string
+                          description: English Name
+                        type:
+                          type: number
+                          description: Type
+                  lang:
+                    type: string
+                    description: Language
+                  read_time:
+                    type: string
+                    description: Content Reading Time
+        status_code:
+          type: number
+          description: Status Code
+        status_msg:
+          type: string
+          description: Status Message
+    Error:
+      type: object
+      required:
+        - status_code
+        - status_msg
+      properties:
+        status_code:
+          type: number
+          description: Error Status Code
+        status_msg:
+          type: string
+          description: Error Message
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
