@@ -1,0 +1,200 @@
+openapi: 3.0.0
+info:
+  title: 快讯 openapi
+  description: '快讯接口'
+  version: 1.0.0
+servers:
+  - url: https://open.ainvest.com/open
+    description: Production environment server
+  - url: https://ainvest-api.touzime.com/open
+    description: Test environment server
+security:
+  - bearerAuth: []
+paths:
+  /news/page:
+    get:
+      summary: 获取新闻动态分页
+      description: '可以通过该接口，以分页方式获取最近快讯列表。'
+      operationId: getNewsPage
+      parameters:
+        - name: tab
+          in: query
+          required: true
+          description: 有pro（付费内容）、latest（全量内容）、markets、stock_ideas、economy、pre_market、earningscall可选
+          schema:
+            type: string
+          example: latest
+        - name: start_id
+          in: query
+          required: true
+          description: 开始id
+          schema:
+            type: string
+          example: '1'
+        - name: size
+          in: query
+          required: true
+          description: 大小
+          schema:
+            type: integer
+            format: int32
+          example: 10
+        - name: Cookie
+          in: header
+          required: true
+          description: cookie值
+          schema:
+            type: string
+          example: userid=123456;sessionid=xxx
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NewsPageResponseCopy'
+        '401':
+          description: 没有权限
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    NewsPageResponseCopy:
+      type: object
+      properties:
+        data:
+          type: object
+          description: 数据
+          properties:
+            page:
+              type: number
+              description: 当前页
+            size:
+              type: number
+              description: 页数
+            data:
+              type: array
+              description: 数据
+              items:
+                type: object
+                required:
+                  - news_id
+                  - content_id
+                  - news_type
+                  - news_from
+                  - news_format
+                  - news_important
+                  - publish_time
+                  - title
+                  - summary
+                  - content
+                  - source
+                  - seo_key
+                  - cover_image
+                  - source_url
+                  - tag_list
+                  - lang
+                  - read_time
+                properties:
+                  news_id:
+                    type: string
+                    description: 内容id
+                  content_id:
+                    type: string
+                    description: 内容中台id
+                  news_type:
+                    type: string
+                    description: 内容类型
+                  news_from:
+                    type: string
+                    description: 内容生成来源
+                  news_format:
+                    type: string
+                    description: 内容格式
+                  news_important:
+                    type: number
+                    description: 内容重要度
+                  publish_time:
+                    type: number
+                    description: 内容发布时间
+                  title:
+                    type: string
+                    description: 内容标题
+                  summary:
+                    type: string
+                    description: 内容标题
+                  content:
+                    type: string
+                    description: 内容正文
+                  source:
+                    type: string
+                    description: 内容作者
+                  seo_key:
+                    type: string
+                    description: 内容seoKey
+                  cover_image:
+                    type: object
+                    description: 内容封面图
+                    properties:
+                      src:
+                        type: string
+                        description: 链接
+                      type:
+                        type: string
+                        description: 类型
+                  source_url:
+                    type: string
+                    description: 内容跳转地址
+                  tag_list:
+                    type: array
+                    description: 内容标签列表
+                    items:
+                      type: object
+                      required:
+                        - code
+                        - market
+                        - name_en
+                        - type
+                      properties:
+                        code:
+                          type: string
+                          description: 代码
+                        market:
+                          type: string
+                          description: 市场
+                        name_en:
+                          type: string
+                          description: 英文名
+                        type:
+                          type: number
+                          description: 类型
+                  lang:
+                    type: string
+                    description: 语言
+                  read_time:
+                    type: string
+                    description: 内容阅读时长
+        status_code:
+          type: number
+          description: 状态码
+        status_msg:
+          type: string
+          description: 状态信息
+    Error:
+      type: object
+      required:
+        - status_code
+        - status_msg
+      properties:
+        status_code:
+          type: number
+          description: 错误状态码
+        status_msg:
+          type: string
+          description: 错误信息
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
