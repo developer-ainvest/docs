@@ -41,7 +41,9 @@
             "pages": [
               {
                 "group": "Coming Soon",
-                "pages": []
+                "pages": [
+                  "essentials/en/comingsoon"
+                ]
               }
             ]
           }
@@ -78,7 +80,9 @@
             "pages": [
               {
                 "group": "敬请期待",
-                "pages": []
+                "pages": [
+                  "essentials/zh/comingsoon"
+                ]
               }
             ]
           }
