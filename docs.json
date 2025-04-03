@@ -29,7 +29,7 @@
                   {
                     "group": "Newswire",
                     "pages": [
-                      "api-reference/en/news/newswire/page"
+                      "api-reference/news/newswire/en/page"
                     ]
                   }
                 ]
@@ -68,7 +68,7 @@
                   {
                     "group": "快讯",
                     "pages": [
-                      "api-reference/zh/news/newswire/page"
+                      "api-reference/news/newswire/zh/page"
                     ]
                   }
                 ]
