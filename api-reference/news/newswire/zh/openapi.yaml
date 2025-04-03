@@ -6,6 +6,8 @@ info:
 servers:
   - url: https://ainvest-api.touzime.com/open
     description: Test environment
+  - url: https://open.ainvest.com/open
+    description: Production environment
 tags:
   - name: News
     description: Operations related to news
