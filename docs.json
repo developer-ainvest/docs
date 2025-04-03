@@ -84,8 +84,8 @@
           {
             "tab": "快速开始",
             "pages": [
-              "/essentials/zh/introduction",
-              "/essentials/zh/auth"
+              "essentials/zh/introduction",
+              "essentials/zh/auth"
             ]
           },
           {
@@ -97,7 +97,7 @@
                   {
                     "group": "快讯",
                     "pages": [
-                      "/api-reference/zh/news/newswire/page"
+                      "api-reference/zh/news/newswire/page"
                     ]
                   }
                 ]
