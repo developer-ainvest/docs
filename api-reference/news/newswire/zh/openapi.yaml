@@ -1,192 +1,441 @@
-openapi: 3.0.0
+openapi: 3.1.0
 info:
-  title: 快讯 openapi
-  description: '快讯接口'
+  title: News API
+  description: API for accessing news articles and details.
   version: 1.0.0
 servers:
-  - url: https://open.ainvest.com/open
-    description: Production environment server
   - url: https://ainvest-api.touzime.com/open
-    description: Test environment server
+    description: Test environment
+tags:
+  - name: News
+    description: Operations related to news
 security:
   - bearerAuth: []
 paths:
   /news/v1/wire/page:
     get:
+      tags:
+        - News
       summary: 获取新闻动态分页
-      description: '可以通过该接口，以分页方式获取最近快讯列表。'
-      operationId: getNewsPage
+      description: Fetches a paginated list of news wires based on the specified tab.
+      operationId: getNewsWirePage
       parameters:
         - name: tab
           in: query
           required: true
-          description: 有pro（付费内容）、latest（全量内容）、markets、stock_ideas、economy、pre_market、earningscall可选
+          description: >-
+            有pro（付费内容）、latest（全量内容）、markets、stock_ideas、economy、pre_market、earningscall可选
           schema:
             type: string
-          example: latest
+            example: latest
         - name: start_id
           in: query
-          required: false
+          required: true
           description: 开始id
           schema:
             type: string
-          example: '1'
+            example: '1'
         - name: size
           in: query
           required: true
           description: 大小
           schema:
             type: integer
-            format: int32
-          example: 10
+            example: 10
       responses:
         '200':
           description: 成功
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NewsPageResponseCopy'
+                $schema: http://json-schema.org/draft-04/schema#
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      page:
+                        type: number
+                        description: 当前页
+                      size:
+                        type: number
+                        description: 页数
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            news_id:
+                              type: string
+                              description: 内容id
+                            content_id:
+                              type: string
+                              description: 内容中台id
+                            news_type:
+                              type: string
+                              description: 内容类型
+                            news_from:
+                              type: string
+                              description: 内容生成来源
+                            news_format:
+                              type: string
+                              description: 内容格式
+                            news_important:
+                              type: number
+                              description: 内容重要度
+                            publish_time:
+                              type: number
+                              description: 内容发布时间
+                            title:
+                              type: string
+                              description: 内容标题
+                            summary:
+                              type: string
+                              description: 内容标题
+                            content:
+                              type: string
+                              description: 内容正文
+                            source:
+                              type: string
+                              description: 内容作者
+                            seo_key:
+                              type: string
+                              description: 内容seoKey
+                            cover_image:
+                              type: object
+                              properties:
+                                src:
+                                  type: string
+                                  description: 链接
+                                type:
+                                  type: string
+                                  description: 类型
+                              description: 内容封面图
+                            source_url:
+                              type: string
+                              description: 内容跳转地址
+                            tag_list:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  code:
+                                    type: string
+                                    description: 代码
+                                  market:
+                                    type: string
+                                    description: 市场
+                                  name_en:
+                                    type: string
+                                    description: 英文名
+                                  type:
+                                    type: number
+                                    description: 类型
+                                required:
+                                  - code
+                                  - market
+                                  - name_en
+                                  - type
+                              description: 内容标签列表
+                            lang:
+                              type: string
+                              description: 语言
+                            read_time:
+                              type: string
+                              description: 内容阅读时长
+                          required:
+                            - news_id
+                            - content_id
+                            - news_type
+                            - news_from
+                            - news_format
+                            - news_important
+                            - publish_time
+                            - title
+                            - summary
+                            - content
+                            - source
+                            - seo_key
+                            - cover_image
+                            - source_url
+                            - tag_list
+                            - lang
+                            - read_time
+                        description: 数据
+                    description: 数据
+                  status_code:
+                    type: number
+                    description: 状态码
+                  status_msg:
+                    type: string
+                    description: 状态信息
         '401':
-          description: 没有权限
+          description: 没有权限 (No Auth)
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              example:
+                status_code: 4010
+                status_msg: no auth
+        '500':
+          description: 服务端错误 (Server Error)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                status_code: 2001
+                status_msg: system error
+  /news/info/{id}:
+    get:
+      tags:
+        - News
+      summary: 获取新闻动态详情
+      description: Fetches the details of a specific news article by its ID (seo key).
+      operationId: getNewsInfoById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: 分页的seo key值
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $schema: http://json-schema.org/draft-04/schema#
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      content_info:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                            description: 内容平台唯一id
+                          biz_id:
+                            type: string
+                            description: 业务id
+                          material_id:
+                            type: string
+                            description: 物料id
+                          valid:
+                            type: number
+                            description: 上下线标识：0-下线，1-上线
+                          title:
+                            type: string
+                            description: 标题
+                          content:
+                            type: string
+                            description: 正文
+                          business_code:
+                            type: string
+                            description: 业务代码
+                          type:
+                            type: number
+                            description: 内容中台业务类型
+                          media:
+                            type: object
+                            properties:
+                              id:
+                                type:
+                                  - 'null'
+                                  - string
+                                description: id
+                              name:
+                                type: string
+                                description: 名称
+                            description: 来源
+                            required:
+                              - id
+                              - name
+                          ctime:
+                            type: number
+                            description: 创建时间
+                          rtime:
+                            type: number
+                            description: 修改时间
+                          summary:
+                            type: string
+                            description: 摘要
+                          author:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              name:
+                                type:
+                                  - 'null'
+                                  - string
+                                description: 名称
+                              authorship:
+                                type:
+                                  - 'null'
+                                  - string
+                                description: 作者身份
+                            description: 作者
+                            required:
+                              - id
+                              - name
+                              - authorship
+                          language:
+                            type: string
+                            description: 语言
+                          cover_image:
+                            type: string
+                            description: 封面图
+                          important:
+                            type: string
+                            description: 重要性
+                          video:
+                            type: boolean
+                            description: 视频
+                          audio:
+                            type: string
+                            description: 音频
+                          charge:
+                            type: number
+                            description: 是否收费
+                          price:
+                            type: string
+                            description: 价格
+                          picture_urls:
+                            type: array
+                            items:
+                              type: string
+                            description: 图片
+                          stock_infos:
+                            type: array
+                            items:
+                              type: string
+                            description: 关联股票
+                          scenes:
+                            type: string
+                            description: 场景
+                        description: 内容数据
+                        required:
+                          - id
+                          - biz_id
+                          - material_id
+                          - valid
+                          - title
+                          - content
+                          - business_code
+                          - type
+                          - media
+                          - ctime
+                          - rtime
+                          - summary
+                          - author
+                          - language
+                          - cover_image
+                          - important
+                          - video
+                          - audio
+                          - charge
+                          - price
+                          - picture_urls
+                          - stock_infos
+                          - scenes
+                      author_info:
+                        type: object
+                        properties:
+                          account_id:
+                            type: string
+                            description: 社区账户ID
+                          nickname:
+                            type: string
+                            description: 账户昵称
+                          account_introduction:
+                            type: string
+                            description: 简介
+                          portrait:
+                            type: string
+                            description: 头像
+                        description: 作者信息
+                        required:
+                          - account_id
+                          - nickname
+                          - account_introduction
+                          - portrait
+                      page_info:
+                        type: object
+                        properties:
+                          jump_type:
+                            type: number
+                            description: 1-展示内容底层页，2-跳转到源网
+                          source_url:
+                            type: string
+                            description: 源网地址
+                          read_time:
+                            type: number
+                            description: 阅读时间
+                        description: 页面额外信息
+                        required:
+                          - jump_type
+                          - source_url
+                          - read_time
+                    required:
+                      - content_info
+                      - author_info
+                      - page_info
+                  status_code:
+                    type: number
+                    description: 状态码
+                  status_msg:
+                    type: string
+                    description: 状态信息
+                required:
+                  - data
+                  - status_code
+                  - status_msg
+        '401':
+          description: 没有权限 (No Auth)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                status_code: 4010
+                status_msg: no auth
+        '404':
+          description: 详情页未找到 (News Detail Not Found)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                status_code: 5202
+                status_msg: news detail not found
+        '500':
+          description: 服务端错误 (Server Error)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                status_code: 2001
+                status_msg: system error
 components:
   schemas:
-    NewsPageResponseCopy:
-      type: object
-      properties:
-        data:
-          type: object
-          description: 数据
-          properties:
-            page:
-              type: number
-              description: 当前页
-            size:
-              type: number
-              description: 页数
-            data:
-              type: array
-              description: 数据
-              items:
-                type: object
-                required:
-                  - news_id
-                  - content_id
-                  - news_type
-                  - news_from
-                  - news_format
-                  - news_important
-                  - publish_time
-                  - title
-                  - summary
-                  - content
-                  - source
-                  - seo_key
-                  - cover_image
-                  - source_url
-                  - tag_list
-                  - lang
-                  - read_time
-                properties:
-                  news_id:
-                    type: string
-                    description: 内容id
-                  content_id:
-                    type: string
-                    description: 内容中台id
-                  news_type:
-                    type: string
-                    description: 内容类型
-                  news_from:
-                    type: string
-                    description: 内容生成来源
-                  news_format:
-                    type: string
-                    description: 内容格式
-                  news_important:
-                    type: number
-                    description: 内容重要度
-                  publish_time:
-                    type: number
-                    description: 内容发布时间
-                  title:
-                    type: string
-                    description: 内容标题
-                  summary:
-                    type: string
-                    description: 内容标题
-                  content:
-                    type: string
-                    description: 内容正文
-                  source:
-                    type: string
-                    description: 内容作者
-                  seo_key:
-                    type: string
-                    description: 内容seoKey
-                  cover_image:
-                    type: object
-                    description: 内容封面图
-                    properties:
-                      src:
-                        type: string
-                        description: 链接
-                      type:
-                        type: string
-                        description: 类型
-                  source_url:
-                    type: string
-                    description: 内容跳转地址
-                  tag_list:
-                    type: array
-                    description: 内容标签列表
-                    items:
-                      type: object
-                      required:
-                        - code
-                        - market
-                        - name_en
-                        - type
-                      properties:
-                        code:
-                          type: string
-                          description: 代码
-                        market:
-                          type: string
-                          description: 市场
-                        name_en:
-                          type: string
-                          description: 英文名
-                        type:
-                          type: number
-                          description: 类型
-                  lang:
-                    type: string
-                    description: 语言
-                  read_time:
-                    type: string
-                    description: 内容阅读时长
-        status_code:
-          type: number
-          description: 状态码
-        status_msg:
-          type: string
-          description: 状态信息
     Error:
       type: object
-      required:
-        - status_code
-        - status_msg
       properties:
         status_code:
-          type: number
-          description: 错误状态码
+          type: integer
+          description: 业务状态码
         status_msg:
           type: string
           description: 错误信息
+      required:
+        - status_code
+        - status_msg
   securitySchemes:
     bearerAuth:
       type: http
