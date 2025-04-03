@@ -11,7 +11,7 @@ servers:
 security:
   - bearerAuth: []
 paths:
-  /v1/news/wire/page:
+  /news/v1/wire/page:
     get:
       summary: 获取新闻动态分页
       description: '可以通过该接口，以分页方式获取最近快讯列表。'
@@ -26,7 +26,7 @@ paths:
           example: latest
         - name: start_id
           in: query
-          required: true
+          required: false
           description: 开始id
           schema:
             type: string
@@ -39,13 +39,6 @@ paths:
             type: integer
             format: int32
           example: 10
-        - name: Cookie
-          in: header
-          required: true
-          description: cookie值
-          schema:
-            type: string
-          example: userid=123456;sessionid=xxx
       responses:
         '200':
           description: 成功
