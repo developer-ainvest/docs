@@ -10,7 +10,7 @@ servers:
     description: Production Environment
 tags:
   - name: News
-    description: Operations related to news
+    description: News-related operations
 security:
   - bearerAuth: []
 paths:
@@ -18,8 +18,8 @@ paths:
     get:
       tags:
         - News
-      summary: Get news feed pagination
-      description: Retrieves a paginated list of news feeds based on specified tags.
+      summary: Get News Feed Page
+      description: Get a paginated list of news feeds based on specified tags.
       operationId: getNewsWirePage
       parameters:
         - name: tab
@@ -27,14 +27,15 @@ paths:
           required: false
           description: >-
             Default is "all".
-            Options include: all, important, movers, earnings, insider_trades, technical, 8k, twitter.
+            Options include all, important, movers, earnings, insider_trades, technical, 8k, twitter.
           schema:
             type: string
-            example: all
+            example: important
+            default: all
         - name: stock
           in: query
           required: false
-          description: US stock ticker symbol
+          description: US stock ticker
           schema:
             type: string
             example: AAPL
@@ -48,17 +49,27 @@ paths:
         - name: start_id
           in: query
           required: false
-          description: Start ID, not required for the first page.
+          description: Start ID, first page can omit start_id
           schema:
             type: string
             example: '100000'
+            default: ''
         - name: size
           in: query
           required: false
-          description: Page size, default is 10 items, maximum is 50 items.
+          description: Page size, default is 10, maximum is 50
           schema:
             type: integer
-            example: 10
+            example: 20
+            default: 10
+        - name: lang
+          in: header
+          required: false
+          description: Language
+          schema:
+            type: string
+            example: zh-hans
+            default: en
       responses:
         '200':
           description: Success
@@ -73,10 +84,10 @@ paths:
                     properties:
                       page:
                         type: number
-                        description: Current page number
+                        description: Current page
                       size:
                         type: number
-                        description: Items per page
+                        description: Page size
                       data:
                         type: array
                         items:
@@ -87,10 +98,10 @@ paths:
                               description: Content ID
                             news_important:
                               type: number
-                              description: Content importance level (0-normal, 1-pushed)
+                              description: Content importance 0-normal 1-pushed
                             publish_time:
                               type: number
-                              description: Content publish timestamp (milliseconds)
+                              description: Content publish time, millisecond timestamp
                             title:
                               type: string
                               description: Content title
@@ -102,13 +113,13 @@ paths:
                               description: Content author name
                             seo_key:
                               type: string
-                              description: Content SEO keywords
+                              description: Content SEO keyword
                             cover_image:
                               type: object
                               properties:
                                 src:
                                   type: string
-                                  description: URL
+                                  description: Link
                                 type:
                                   type: string
                                   description: Type
@@ -132,8 +143,7 @@ paths:
                                     description: English name
                                   type:
                                     type: number
-                                    description: >-
-                                      Type (0-individual stock, 1-concept, 7-digital currency, 4-other business tag)
+                                    description: Type 0-stock 1-concept 7-digital currency 4-other business tag
                                 required:
                                   - code
                                   - market
@@ -145,7 +155,7 @@ paths:
                               description: Language
                             read_time:
                               type: string
-                              description: Content reading time
+                              description: Content reading duration
                           required:
                             - news_id
                             - news_important
@@ -189,8 +199,8 @@ paths:
     get:
       tags:
         - News
-      summary: Get news feed details
-      description: Retrieves detailed information for a specific news article by ID (SEO keyword).
+      summary: Get News Feed Details
+      description: Get detailed information for a specific news article by ID (SEO keyword).
       operationId: getNewsInfoById
       parameters:
         - name: id
@@ -219,13 +229,13 @@ paths:
                             description: Content platform unique ID
                           valid:
                             type: number
-                            description: Online/offline status (0-offline, 1-online)
+                            description: 'Online/offline flag: 0-offline, 1-online'
                           title:
                             type: string
                             description: Title
                           content:
                             type: string
-                            description: Content body
+                            description: Body
                           media:
                             type: object
                             properties:
@@ -241,10 +251,10 @@ paths:
                               - name
                           ctime:
                             type: number
-                            description: Creation timestamp (seconds)
+                            description: Creation time, seconds timestamp
                           rtime:
                             type: number
-                            description: Modification timestamp (milliseconds)
+                            description: Modification time, millisecond timestamp
                           language:
                             type: string
                             description: Language
@@ -264,7 +274,7 @@ paths:
                             type: array
                             items:
                               type: string
-                            description: Related stocks
+                            description: Associated stocks
                         description: Content data
                         required:
                           - id
@@ -291,7 +301,7 @@ paths:
                             description: Account nickname
                           account_introduction:
                             type: string
-                            description: Account introduction
+                            description: Introduction
                           portrait:
                             type: string
                             description: Profile picture
@@ -331,7 +341,7 @@ paths:
                 $ref: '#/components/schemas/Error'
               example:
                 status_code: 5202
-                status_msg: News detail not found
+                status_msg: News details not found
         '500':
           description: Server Error
           content:
@@ -359,4 +369,4 @@ components:
     bearerAuth:
       type: http
       scheme: bearer
-      description: '[Request apikey](https://ainvest.com)'
+      description: '[Apply for apikey](https://ainvest.com)'
