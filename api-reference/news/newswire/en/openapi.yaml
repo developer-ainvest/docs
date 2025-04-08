@@ -10,7 +10,7 @@ servers:
     description: Production Environment
 tags:
   - name: News
-    description: News-related operations
+    description: News related operations
 security:
   - bearerAuth: []
 paths:
@@ -18,16 +18,25 @@ paths:
     get:
       tags:
         - News
-      summary: Get News Feed Page
+      summary: Get News Wire Page
       description: Get a paginated list of news feeds based on specified tags.
       operationId: getNewsWirePage
       parameters:
         - name: tab
           in: query
           required: false
-          description: >-
-            Default is "all".
-            Options include all, important, movers, earnings, insider_trades, technical, 8k, twitter.
+          description: |
+            Defaults to "all"
+            | Parameter Name | Description |
+            |----------------|-------------|
+            | pro | Paid content |
+            | latest | Full content |
+            | markets | Markets |
+            | stock_ideas | Stock insights |
+            | economy | Economy |
+            | pre_market | Pre-market |
+            | earningscall | Earnings call |
+            | all | All content |
           schema:
             type: string
             example: important
@@ -49,7 +58,7 @@ paths:
         - name: start_id
           in: query
           required: false
-          description: Start ID, first page can omit start_id
+          description: Start ID, the first page can omit start_id
           schema:
             type: string
             example: '100000'
@@ -57,7 +66,7 @@ paths:
         - name: size
           in: query
           required: false
-          description: Page size, default is 10, maximum is 50
+          description: Page size, default is 10 items, maximum is 50 items
           schema:
             type: integer
             example: 20
@@ -98,7 +107,7 @@ paths:
                               description: Content ID
                             news_important:
                               type: number
-                              description: Content importance 0-normal 1-pushed
+                              description: Content importance 0-normal 1-push
                             publish_time:
                               type: number
                               description: Content publish time, millisecond timestamp
@@ -113,7 +122,7 @@ paths:
                               description: Content author name
                             seo_key:
                               type: string
-                              description: Content SEO keyword
+                              description: Content SEO keywords
                             cover_image:
                               type: object
                               properties:
@@ -143,7 +152,7 @@ paths:
                                     description: English name
                                   type:
                                     type: number
-                                    description: Type 0-stock 1-concept 7-digital currency 4-other business tag
+                                    description: Type 0-individual stock 1-concept 7-digital currency 4-other business tag
                                 required:
                                   - code
                                   - market
@@ -155,7 +164,7 @@ paths:
                               description: Language
                             read_time:
                               type: string
-                              description: Content reading duration
+                              description: Content reading time
                           required:
                             - news_id
                             - news_important
@@ -178,14 +187,14 @@ paths:
                     type: string
                     description: Status message
         '401':
-          description: Unauthorized (No Auth)
+          description: No Auth
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
               example:
                 status_code: 4010
-                status_msg: Unauthorized
+                status_msg: No Auth
         '500':
           description: Server Error
           content:
@@ -199,14 +208,14 @@ paths:
     get:
       tags:
         - News
-      summary: Get News Feed Details
-      description: Get detailed information for a specific news article by ID (SEO keyword).
+      summary: Get News Wire Info by ID
+      description: Get detailed information for a specific news article by ID (seo_key).
       operationId: getNewsInfoById
       parameters:
         - name: id
           in: path
           required: true
-          description: seo_key for pagination
+          description: seo_key of the page
           schema:
             type: string
       responses:
@@ -226,7 +235,7 @@ paths:
                         properties:
                           id:
                             type: string
-                            description: Content platform unique ID
+                            description: Unique content platform ID
                           valid:
                             type: number
                             description: 'Online/offline flag: 0-offline, 1-online'
@@ -251,7 +260,7 @@ paths:
                               - name
                           ctime:
                             type: number
-                            description: Creation time, seconds timestamp
+                            description: Creation time, second timestamp
                           rtime:
                             type: number
                             description: Modification time, millisecond timestamp
@@ -274,7 +283,7 @@ paths:
                             type: array
                             items:
                               type: string
-                            description: Associated stocks
+                            description: Related stocks
                         description: Content data
                         required:
                           - id
@@ -304,7 +313,7 @@ paths:
                             description: Introduction
                           portrait:
                             type: string
-                            description: Profile picture
+                            description: Portrait
                         description: Author information
                         required:
                           - account_id
@@ -325,14 +334,14 @@ paths:
                   - status_code
                   - status_msg
         '401':
-          description: Unauthorized (No Auth)
+          description: No Auth
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
               example:
                 status_code: 4010
-                status_msg: Unauthorized
+                status_msg: No Auth
         '404':
           description: News Detail Not Found
           content:
@@ -341,7 +350,7 @@ paths:
                 $ref: '#/components/schemas/Error'
               example:
                 status_code: 5202
-                status_msg: News details not found
+                status_msg: News detail not found
         '500':
           description: Server Error
           content:
