@@ -343,4 +343,4 @@ components:
     bearerAuth:
       type: http
       scheme: bearer
-      description: '[申请 apikey](https://ainvest.com)''
+      description: '[申请 apikey](https://ainvest.com)'
