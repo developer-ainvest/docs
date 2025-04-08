@@ -25,17 +25,17 @@ paths:
         - name: tab
           in: query
           required: false
-          description: >-
+          description: |
             默认为 “all“
-            | 参数名称       | 描述         | \n
-            |----------------|--------------| \n
-            | pro            | 付费内容     | \n
-            | latest         | 全量内容     | \n
-            | markets        | 市场         | \n
-            | stock_ideas    | 股票观点     | \n
-            | economy        | 经济         | \n
-            | pre_market     | 盘前         | \n
-            | earningscall   | 财报电话会议 | \n
+            | 参数名称       | 描述         |
+            |----------------|--------------|
+            | pro            | 付费内容     |
+            | latest         | 全量内容     |
+            | markets        | 市场         |
+            | stock_ideas    | 股票观点     |
+            | economy        | 经济         |
+            | pre_market     | 盘前         |
+            | earningscall   | 财报电话会议 |
             | all            | 全部内容     |
           schema:
             type: string
