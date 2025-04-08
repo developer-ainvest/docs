@@ -182,7 +182,18 @@ paths:
                     description: Data
                   status_code:
                     type: number
-                    description: Status code
+                    description: |
+                      Status Codes
+                      | Code  | English Description                                                     |
+                      |-------|--------------------------------------------------------------------------|
+                      | 2001  | System Error                                                             |
+                      | 2002  | Check Your Balance Is Insufficient. Please Recharge In Time              |
+                      | 0     | Success                                                                  |
+                      | 4010  | No Auth                                                                  |
+                      | 4011  | Authorization Style Invalid, Start With Bearer                           |
+                      | 5201  | News Page Not Found                                                      |
+                      | 5202  | News Detail Not Found                                                    |
+                      | 5203  | Request Error                                                            |
                   status_msg:
                     type: string
                     description: Status message
@@ -325,7 +336,18 @@ paths:
                       - author_info
                   status_code:
                     type: number
-                    description: Status code
+                    description: |
+                      Status Codes
+                      | Code  | English Description                                                     |
+                      |-------|--------------------------------------------------------------------------|
+                      | 2001  | System Error                                                             |
+                      | 2002  | Check Your Balance Is Insufficient. Please Recharge In Time              |
+                      | 0     | Success                                                                  |
+                      | 4010  | No Auth                                                                  |
+                      | 4011  | Authorization Style Invalid, Start With Bearer                           |
+                      | 5201  | News Page Not Found                                                      |
+                      | 5202  | News Detail Not Found                                                    |
+                      | 5203  | Request Error                                                            |
                   status_msg:
                     type: string
                     description: Status message
