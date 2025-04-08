@@ -3,28 +3,43 @@ title: General Specifications
 ---
 
 
-# 1. Request Header
+# 1. Request Headers
 
-## 1.1 Multi-Language
+## 1.1 Multilingual Support
 
-Some interfaces, such as news, support multiple languages. You can specify the language by adding `Accept-Language = zh-hans` in the request header. Generally, the default language is English.
+Certain endpoints (e.g., news-related interfaces) support multiple languages. Clients can specify the language by adding `Accept-Language = zh-hans` to the request headers. The default language is typically English.
 
-Supported Languages:
+Supported languages:
 
-| Language        | Code      |
-|-----------------|-----------|
-| Indonesian      | id        |
-| German          | de        |
-| Japanese        | ja        |
-| French          | fr        |
-| Simplified Chinese| zh-hans   |
-| Traditional Chinese | zh-hant   |
-| English         | en        |
-| Spanish         | es        |
-| Vietnamese      | vi        |
-| Arabic          | ar        |
-| Korean          | ko        |
-| Malay           | ms        |
-| Thai            | th        |
-| Hebrew          | he        |
-| Portuguese      | pt        |
+| Language         | Code      |
+|------------------|-----------|
+| Indonesian       | id        |
+| German           | de        |
+| Japanese         | ja        |
+| French           | fr        |
+| Simplified Chinese | zh-hans  |
+| Traditional Chinese | zh-hant |
+| English          | en        |
+| Spanish          | es        |
+| Vietnamese       | vi        |
+| Arabic           | ar        |
+| Korean           | ko        |
+| Malay            | ms        |
+| Thai             | th        |
+| Hebrew           | he        |
+| Portuguese       | pt        |
+
+
+
+# 2. Response Status Codes
+
+| Code  | Message                     |
+|-------|-----------------------------|
+| 2001  | System Exception            |
+| 2002  | Usage quota exhausted, please recharge |
+| 0     | Success                     |
+| 4010  | No permission               |
+| 4011  | Invalid permission header field |
+| 5201  | News page not found         |
+| 5202  | Detail page not found       |
+| 5203  | Failed to request news data |
