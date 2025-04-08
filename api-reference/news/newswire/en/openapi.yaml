@@ -18,7 +18,7 @@ paths:
     get:
       tags:
         - News
-      summary: Get News Wire Page
+      summary: Get news wire page
       description: Fetches a paginated list of news wires based on the specified tab.
       operationId: getNewsWirePage
       parameters:
@@ -26,7 +26,7 @@ paths:
           in: query
           required: true
           description: >-
-            Options include pro (paid content), latest (full content), markets, stock_ideas, economy, pre_market, earningscall
+            Options: pro (paid content), latest (full content), markets, stock_ideas, economy, pre_market, earningscall
           schema:
             type: string
             example: latest
@@ -70,36 +70,21 @@ paths:
                             news_id:
                               type: string
                               description: Content ID
-                            content_id:
-                              type: string
-                              description: Content platform ID
-                            news_type:
-                              type: string
-                              description: Content type
-                            news_from:
-                              type: string
-                              description: Content generation source
-                            news_format:
-                              type: string
-                              description: Content format
                             news_important:
                               type: number
-                              description: Content importance
+                              description: Content importance 0-normal 1-pushed
                             publish_time:
                               type: number
-                              description: Content publish time
+                              description: Content publish time, millisecond timestamp
                             title:
                               type: string
                               description: Content title
-                            summary:
-                              type: string
-                              description: Content summary
                             content:
                               type: string
-                              description: Content body
+                              description: Content text
                             source:
                               type: string
-                              description: Content author
+                              description: Content author name
                             seo_key:
                               type: string
                               description: Content SEO key
@@ -132,7 +117,7 @@ paths:
                                     description: English name
                                   type:
                                     type: number
-                                    description: Type
+                                    description: Type 0-stock 1-concept 7-digital currency 4-other business tag
                                 required:
                                   - code
                                   - market
@@ -144,17 +129,12 @@ paths:
                               description: Language
                             read_time:
                               type: string
-                              description: Content reading time
+                              description: Content read time
                           required:
                             - news_id
-                            - content_id
-                            - news_type
-                            - news_from
-                            - news_format
                             - news_important
                             - publish_time
                             - title
-                            - summary
                             - content
                             - source
                             - seo_key
@@ -193,8 +173,8 @@ paths:
     get:
       tags:
         - News
-      summary: Get News Info By ID
-      description: Fetches the details of a specific news article by its ID (seo key).
+      summary: Get news wire info by ID
+      description: Fetches the details of a specific news article by its ID (SEO key).
       operationId: getNewsInfoById
       parameters:
         - name: id
@@ -220,35 +200,21 @@ paths:
                         properties:
                           id:
                             type: string
-                            description: Content platform unique ID
-                          biz_id:
-                            type: string
-                            description: Business ID
-                          material_id:
-                            type: string
-                            description: Material ID
+                            description: Unique content platform ID
                           valid:
                             type: number
-                            description: Online/offline flag 0-offline, 1-online
+                            description: 'Online/offline flag: 0-offline, 1-online'
                           title:
                             type: string
                             description: Title
                           content:
                             type: string
-                            description: Body
-                          business_code:
-                            type: string
-                            description: Business code
-                          type:
-                            type: number
-                            description: Content platform business type
+                            description: Content
                           media:
                             type: object
                             properties:
                               id:
-                                type:
-                                  - 'null'
-                                  - string
+                                type: string
                                 description: ID
                               name:
                                 type: string
@@ -259,42 +225,16 @@ paths:
                               - name
                           ctime:
                             type: number
-                            description: Creation time
+                            description: Create time, second timestamp
                           rtime:
                             type: number
-                            description: Modification time
-                          summary:
-                            type: string
-                            description: Summary
-                          author:
-                            type: object
-                            properties:
-                              id:
-                                type: string
-                              name:
-                                type:
-                                  - 'null'
-                                  - string
-                                description: Name
-                              authorship:
-                                type:
-                                  - 'null'
-                                  - string
-                                description: Author authorship
-                            description: Author
-                            required:
-                              - id
-                              - name
-                              - authorship
+                            description: Modify time, millisecond timestamp
                           language:
                             type: string
                             description: Language
                           cover_image:
                             type: string
                             description: Cover image
-                          important:
-                            type: string
-                            description: Importance
                           video:
                             type: boolean
                             description: Video
@@ -304,47 +244,26 @@ paths:
                           charge:
                             type: number
                             description: Is charged
-                          price:
-                            type: string
-                            description: Price
-                          picture_urls:
-                            type: array
-                            items:
-                              type: string
-                            description: Pictures
                           stock_infos:
                             type: array
                             items:
                               type: string
                             description: Related stocks
-                          scenes:
-                            type: string
-                            description: Scenes
                         description: Content data
                         required:
                           - id
-                          - biz_id
-                          - material_id
                           - valid
                           - title
                           - content
-                          - business_code
-                          - type
                           - media
                           - ctime
                           - rtime
-                          - summary
-                          - author
                           - language
                           - cover_image
-                          - important
                           - video
                           - audio
                           - charge
-                          - price
-                          - picture_urls
                           - stock_infos
-                          - scenes
                       author_info:
                         type: object
                         properties:
@@ -360,33 +279,15 @@ paths:
                           portrait:
                             type: string
                             description: Portrait
-                        description: Author information
+                        description: Author info
                         required:
                           - account_id
                           - nickname
                           - account_introduction
                           - portrait
-                      page_info:
-                        type: object
-                        properties:
-                          jump_type:
-                            type: number
-                            description: 1-Display content bottom page, 2-Jump to source network
-                          source_url:
-                            type: string
-                            description: Source network address
-                          read_time:
-                            type: number
-                            description: Reading time
-                        description: Page additional information
-                        required:
-                          - jump_type
-                          - source_url
-                          - read_time
                     required:
                       - content_info
                       - author_info
-                      - page_info
                   status_code:
                     type: number
                     description: Status code
@@ -442,3 +343,4 @@ components:
     bearerAuth:
       type: http
       scheme: bearer
+      description: '[Apply for API Key](https://ainvest.com)'

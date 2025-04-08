@@ -1,16 +1,16 @@
 openapi: 3.1.0
 info:
   title: News API
-  description: API for accessing news articles and details.
+  description: 用于访问新闻文章和详情的API。
   version: 1.0.0
 servers:
   - url: https://ainvest-api.touzime.com/open
-    description: Test environment
+    description: 测试环境
   - url: https://open.ainvest.com/open
-    description: Production environment
+    description: 生产环境
 tags:
   - name: News
-    description: Operations related to news
+    description: 与新闻相关的操作
 security:
   - bearerAuth: []
 paths:
@@ -19,21 +19,21 @@ paths:
       tags:
         - News
       summary: 获取新闻动态分页
-      description: Fetches a paginated list of news wires based on the specified tab.
+      description: 根据指定的标签获取新闻动态分页列表。
       operationId: getNewsWirePage
       parameters:
         - name: tab
           in: query
           required: true
           description: >-
-            有pro（付费内容）、latest（全量内容）、markets、stock_ideas、economy、pre_market、earningscall可选
+            可选值：pro（付费内容）、latest（全量内容）、markets、stock_ideas、economy、pre_market、earningscall
           schema:
             type: string
             example: latest
         - name: start_id
           in: query
           required: true
-          description: 开始id
+          description: 开始ID
           schema:
             type: string
             example: '1'
@@ -69,29 +69,14 @@ paths:
                           properties:
                             news_id:
                               type: string
-                              description: 内容id
-                            content_id:
-                              type: string
-                              description: 内容中台id
-                            news_type:
-                              type: string
-                              description: 内容类型
-                            news_from:
-                              type: string
-                              description: 内容生成来源
-                            news_format:
-                              type: string
-                              description: 内容格式
+                              description: 内容ID
                             news_important:
                               type: number
-                              description: 内容重要度
+                              description: 内容重要度 0-普通 1-推送
                             publish_time:
                               type: number
-                              description: 内容发布时间
+                              description: 内容发布时间 毫秒级时间戳
                             title:
-                              type: string
-                              description: 内容标题
-                            summary:
                               type: string
                               description: 内容标题
                             content:
@@ -99,10 +84,10 @@ paths:
                               description: 内容正文
                             source:
                               type: string
-                              description: 内容作者
+                              description: 内容作者名称
                             seo_key:
                               type: string
-                              description: 内容seoKey
+                              description: 内容SEO关键字
                             cover_image:
                               type: object
                               properties:
@@ -132,7 +117,7 @@ paths:
                                     description: 英文名
                                   type:
                                     type: number
-                                    description: 类型
+                                    description: 类型 0-个股 1-概念 7-数字币 4-其他业务标签
                                 required:
                                   - code
                                   - market
@@ -147,14 +132,9 @@ paths:
                               description: 内容阅读时长
                           required:
                             - news_id
-                            - content_id
-                            - news_type
-                            - news_from
-                            - news_format
                             - news_important
                             - publish_time
                             - title
-                            - summary
                             - content
                             - source
                             - seo_key
@@ -179,7 +159,7 @@ paths:
                 $ref: '#/components/schemas/Error'
               example:
                 status_code: 4010
-                status_msg: no auth
+                status_msg: 没有权限
         '500':
           description: 服务端错误 (Server Error)
           content:
@@ -188,19 +168,19 @@ paths:
                 $ref: '#/components/schemas/Error'
               example:
                 status_code: 2001
-                status_msg: system error
+                status_msg: 系统错误
   /news/v1/wire/info/{id}:
     get:
       tags:
         - News
       summary: 获取新闻动态详情
-      description: Fetches the details of a specific news article by its ID (seo key).
+      description: 通过ID（SEO关键字）获取特定新闻文章的详细信息。
       operationId: getNewsInfoById
       parameters:
         - name: id
           in: path
           required: true
-          description: 分页的seo key值
+          description: 分页的SEO关键字值
           schema:
             type: string
       responses:
@@ -220,13 +200,7 @@ paths:
                         properties:
                           id:
                             type: string
-                            description: 内容平台唯一id
-                          biz_id:
-                            type: string
-                            description: 业务id
-                          material_id:
-                            type: string
-                            description: 物料id
+                            description: 内容平台唯一ID
                           valid:
                             type: number
                             description: 上下线标识：0-下线，1-上线
@@ -236,20 +210,12 @@ paths:
                           content:
                             type: string
                             description: 正文
-                          business_code:
-                            type: string
-                            description: 业务代码
-                          type:
-                            type: number
-                            description: 内容中台业务类型
                           media:
                             type: object
                             properties:
                               id:
-                                type:
-                                  - 'null'
-                                  - string
-                                description: id
+                                type: string
+                                description: ID
                               name:
                                 type: string
                                 description: 名称
@@ -259,42 +225,16 @@ paths:
                               - name
                           ctime:
                             type: number
-                            description: 创建时间
+                            description: 创建时间 秒级时间戳
                           rtime:
                             type: number
-                            description: 修改时间
-                          summary:
-                            type: string
-                            description: 摘要
-                          author:
-                            type: object
-                            properties:
-                              id:
-                                type: string
-                              name:
-                                type:
-                                  - 'null'
-                                  - string
-                                description: 名称
-                              authorship:
-                                type:
-                                  - 'null'
-                                  - string
-                                description: 作者身份
-                            description: 作者
-                            required:
-                              - id
-                              - name
-                              - authorship
+                            description: 修改时间 毫秒级时间戳
                           language:
                             type: string
-                            description: 语言
+                            description: 语言 
                           cover_image:
                             type: string
                             description: 封面图
-                          important:
-                            type: string
-                            description: 重要性
                           video:
                             type: boolean
                             description: 视频
@@ -304,47 +244,26 @@ paths:
                           charge:
                             type: number
                             description: 是否收费
-                          price:
-                            type: string
-                            description: 价格
-                          picture_urls:
-                            type: array
-                            items:
-                              type: string
-                            description: 图片
                           stock_infos:
                             type: array
                             items:
                               type: string
                             description: 关联股票
-                          scenes:
-                            type: string
-                            description: 场景
                         description: 内容数据
                         required:
                           - id
-                          - biz_id
-                          - material_id
                           - valid
                           - title
                           - content
-                          - business_code
-                          - type
                           - media
                           - ctime
                           - rtime
-                          - summary
-                          - author
                           - language
                           - cover_image
-                          - important
                           - video
                           - audio
                           - charge
-                          - price
-                          - picture_urls
                           - stock_infos
-                          - scenes
                       author_info:
                         type: object
                         properties:
@@ -366,27 +285,9 @@ paths:
                           - nickname
                           - account_introduction
                           - portrait
-                      page_info:
-                        type: object
-                        properties:
-                          jump_type:
-                            type: number
-                            description: 1-展示内容底层页，2-跳转到源网
-                          source_url:
-                            type: string
-                            description: 源网地址
-                          read_time:
-                            type: number
-                            description: 阅读时间
-                        description: 页面额外信息
-                        required:
-                          - jump_type
-                          - source_url
-                          - read_time
                     required:
                       - content_info
                       - author_info
-                      - page_info
                   status_code:
                     type: number
                     description: 状态码
@@ -405,7 +306,7 @@ paths:
                 $ref: '#/components/schemas/Error'
               example:
                 status_code: 4010
-                status_msg: no auth
+                status_msg: 没有权限
         '404':
           description: 详情页未找到 (News Detail Not Found)
           content:
@@ -414,7 +315,7 @@ paths:
                 $ref: '#/components/schemas/Error'
               example:
                 status_code: 5202
-                status_msg: news detail not found
+                status_msg: 新闻详情未找到
         '500':
           description: 服务端错误 (Server Error)
           content:
@@ -423,7 +324,7 @@ paths:
                 $ref: '#/components/schemas/Error'
               example:
                 status_code: 2001
-                status_msg: system error
+                status_msg: 系统错误
 components:
   schemas:
     Error:
@@ -442,5 +343,4 @@ components:
     bearerAuth:
       type: http
       scheme: bearer
-      description: '[访问 AInvest 官网](https://ainvest.com)'
-
+      description: '[申请 apikey](https://ainvest.com)''
