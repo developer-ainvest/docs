@@ -442,3 +442,4 @@ components:
     bearerAuth:
       type: http
       scheme: bearer
+      description: <a href="https://ainvest.com">点击跳转</a>
