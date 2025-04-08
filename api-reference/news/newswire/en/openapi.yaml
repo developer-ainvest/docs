@@ -5,9 +5,9 @@ info:
   version: 1.0.0
 servers:
   - url: https://ainvest-api.touzime.com/open
-    description: Test environment
+    description: Test Environment
   - url: https://open.ainvest.com/open
-    description: Production environment
+    description: Production Environment
 tags:
   - name: News
     description: Operations related to news
@@ -18,29 +18,44 @@ paths:
     get:
       tags:
         - News
-      summary: Get news wire page
-      description: Fetches a paginated list of news wires based on the specified tab.
+      summary: Get news feed pagination
+      description: Retrieves a paginated list of news feeds based on specified tags.
       operationId: getNewsWirePage
       parameters:
         - name: tab
           in: query
-          required: true
+          required: false
           description: >-
-            Options: pro (paid content), latest (full content), markets, stock_ideas, economy, pre_market, earningscall
+            Default is "all".
+            Options include: all, important, movers, earnings, insider_trades, technical, 8k, twitter.
           schema:
             type: string
-            example: latest
+            example: all
+        - name: stock
+          in: query
+          required: false
+          description: US stock ticker symbol
+          schema:
+            type: string
+            example: AAPL
+        - name: industry
+          in: query
+          required: false
+          description: Industry code
+          schema:
+            type: string
+            example: software
         - name: start_id
           in: query
-          required: true
-          description: Start ID
+          required: false
+          description: Start ID, not required for the first page.
           schema:
             type: string
-            example: '1'
+            example: '100000'
         - name: size
           in: query
-          required: true
-          description: Size
+          required: false
+          description: Page size, default is 10 items, maximum is 50 items.
           schema:
             type: integer
             example: 10
@@ -58,10 +73,10 @@ paths:
                     properties:
                       page:
                         type: number
-                        description: Current page
+                        description: Current page number
                       size:
                         type: number
-                        description: Page size
+                        description: Items per page
                       data:
                         type: array
                         items:
@@ -72,28 +87,28 @@ paths:
                               description: Content ID
                             news_important:
                               type: number
-                              description: Content importance 0-normal 1-pushed
+                              description: Content importance level (0-normal, 1-pushed)
                             publish_time:
                               type: number
-                              description: Content publish time, millisecond timestamp
+                              description: Content publish timestamp (milliseconds)
                             title:
                               type: string
                               description: Content title
                             content:
                               type: string
-                              description: Content text
+                              description: Content body
                             source:
                               type: string
                               description: Content author name
                             seo_key:
                               type: string
-                              description: Content SEO key
+                              description: Content SEO keywords
                             cover_image:
                               type: object
                               properties:
                                 src:
                                   type: string
-                                  description: Link
+                                  description: URL
                                 type:
                                   type: string
                                   description: Type
@@ -117,7 +132,8 @@ paths:
                                     description: English name
                                   type:
                                     type: number
-                                    description: Type 0-stock 1-concept 7-digital currency 4-other business tag
+                                    description: >-
+                                      Type (0-individual stock, 1-concept, 7-digital currency, 4-other business tag)
                                 required:
                                   - code
                                   - market
@@ -129,7 +145,7 @@ paths:
                               description: Language
                             read_time:
                               type: string
-                              description: Content read time
+                              description: Content reading time
                           required:
                             - news_id
                             - news_important
@@ -152,14 +168,14 @@ paths:
                     type: string
                     description: Status message
         '401':
-          description: No Auth
+          description: Unauthorized (No Auth)
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
               example:
                 status_code: 4010
-                status_msg: no auth
+                status_msg: Unauthorized
         '500':
           description: Server Error
           content:
@@ -168,19 +184,19 @@ paths:
                 $ref: '#/components/schemas/Error'
               example:
                 status_code: 2001
-                status_msg: system error
+                status_msg: System error
   /news/v1/wire/info/{id}:
     get:
       tags:
         - News
-      summary: Get news wire info by ID
-      description: Fetches the details of a specific news article by its ID (SEO key).
+      summary: Get news feed details
+      description: Retrieves detailed information for a specific news article by ID (SEO keyword).
       operationId: getNewsInfoById
       parameters:
         - name: id
           in: path
           required: true
-          description: SEO key for pagination
+          description: SEO keyword value for pagination
           schema:
             type: string
       responses:
@@ -200,16 +216,16 @@ paths:
                         properties:
                           id:
                             type: string
-                            description: Unique content platform ID
+                            description: Content platform unique ID
                           valid:
                             type: number
-                            description: 'Online/offline flag: 0-offline, 1-online'
+                            description: Online/offline status (0-offline, 1-online)
                           title:
                             type: string
                             description: Title
                           content:
                             type: string
-                            description: Content
+                            description: Content body
                           media:
                             type: object
                             properties:
@@ -225,10 +241,10 @@ paths:
                               - name
                           ctime:
                             type: number
-                            description: Create time, second timestamp
+                            description: Creation timestamp (seconds)
                           rtime:
                             type: number
-                            description: Modify time, millisecond timestamp
+                            description: Modification timestamp (milliseconds)
                           language:
                             type: string
                             description: Language
@@ -275,11 +291,11 @@ paths:
                             description: Account nickname
                           account_introduction:
                             type: string
-                            description: Introduction
+                            description: Account introduction
                           portrait:
                             type: string
-                            description: Portrait
-                        description: Author info
+                            description: Profile picture
+                        description: Author information
                         required:
                           - account_id
                           - nickname
@@ -299,14 +315,14 @@ paths:
                   - status_code
                   - status_msg
         '401':
-          description: No Auth
+          description: Unauthorized (No Auth)
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
               example:
                 status_code: 4010
-                status_msg: no auth
+                status_msg: Unauthorized
         '404':
           description: News Detail Not Found
           content:
@@ -315,7 +331,7 @@ paths:
                 $ref: '#/components/schemas/Error'
               example:
                 status_code: 5202
-                status_msg: news detail not found
+                status_msg: News detail not found
         '500':
           description: Server Error
           content:
@@ -324,7 +340,7 @@ paths:
                 $ref: '#/components/schemas/Error'
               example:
                 status_code: 2001
-                status_msg: system error
+                status_msg: System error
 components:
   schemas:
     Error:
@@ -343,4 +359,4 @@ components:
     bearerAuth:
       type: http
       scheme: bearer
-      description: '[Apply for API Key](https://ainvest.com)'
+      description: '[Request apikey](https://ainvest.com)'
