@@ -30,7 +30,8 @@ paths:
             有all、important、movers、earnings、insider_trades、technical、8k、twitter可选
           schema:
             type: string
-            example: all
+            example: important
+            default: all
         - name: stock
           in: query
           required: false
@@ -52,13 +53,15 @@ paths:
           schema:
             type: string
             example: '100000'
+            default: ''
         - name: size
           in: query
           required: false
           description: 页大小，默认 为 10 条，最大为 50 条
           schema:
             type: integer
-            example: 10
+            example: 20
+            default: 10
         - name: lang
           in: header
           required: false
@@ -82,7 +85,8 @@ paths:
             | 葡萄牙语   | pt     | 
           schema:
             type: string
-            example: zh
+            example: zh-hans
+            default: en
       responses:
         '200':
           description: 成功
