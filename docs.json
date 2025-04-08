@@ -23,6 +23,7 @@
           {
             "tab": "API Documentation",
             "pages": [
+              "api-reference/general-en",
               {
                 "group": "News",
                 "pages": [
@@ -63,6 +64,7 @@
           {
             "tab": "接口文档",
             "pages": [
+              "api-reference/general-zh",
               {
                 "group": "资讯",
                 "pages": [
