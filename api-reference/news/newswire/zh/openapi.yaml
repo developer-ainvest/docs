@@ -62,7 +62,7 @@ paths:
             type: integer
             example: 20
             default: 10
-        - name: lang
+        - name: Accept-Language
           in: header
           required: false
           description: 语种
@@ -200,13 +200,13 @@ paths:
       tags:
         - News
       summary: 获取新闻动态详情
-      description: 通过ID（SEO关键字）获取特定新闻文章的详细信息。
+      description: 通过ID（seo_key）获取特定新闻文章的详细信息。
       operationId: getNewsInfoById
       parameters:
         - name: id
           in: path
           required: true
-          description: 分页的SEO关键字值
+          description: 分页的seo_key
           schema:
             type: string
       responses:

@@ -62,7 +62,7 @@ paths:
             type: integer
             example: 20
             default: 10
-        - name: lang
+        - name: Accept-Language
           in: header
           required: false
           description: Language
@@ -206,7 +206,7 @@ paths:
         - name: id
           in: path
           required: true
-          description: SEO keyword value for pagination
+          description: seo_key for pagination
           schema:
             type: string
       responses:
