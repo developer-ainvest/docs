@@ -61,8 +61,8 @@ paths:
           description: 开始ID，第一页可以不传 start_id
           schema:
             type: string
-            example: '100000'
-            default: ''
+            example: "100000"
+            default: ""
         - name: size
           in: query
           required: false
@@ -80,7 +80,7 @@ paths:
             example: zh-hans
             default: en
       responses:
-        '200':
+        "200":
           description: 成功
           content:
             application/json:
@@ -182,25 +182,36 @@ paths:
                     description: 数据
                   status_code:
                     type: number
-                    description: 状态码
+                    description: |
+                      状态码
+                      | 代码  | 英文提示                                                               | 中文提示                     |
+                      |-------|--------------------------------------------------------------------------|------------------------------|
+                      | 2001  | system error                                                             | 系统异常                     |
+                      | 2002  | check your balance is insufficient. Please recharge in time              | 使用额度用尽，请充值         |
+                      | 0     | success                                                                  | 成功                         |
+                      | 4010  | no auth                                                                  | 没有权限                     |
+                      | 4011  | Authorization style invalid, start with Bearer                           | 权限头字段不对               |
+                      | 5201  | news page not found                                                      | 新闻页未找到                 |
+                      | 5202  | news detail not found                                                    | 详情页未找到                 |
+                      | 5203  | request error                                                            | 请求新闻数据失败             |
                   status_msg:
                     type: string
                     description: 状态信息
-        '401':
+        "401":
           description: 没有权限 (No Auth)
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
               example:
                 status_code: 4010
                 status_msg: 没有权限
-        '500':
+        "500":
           description: 服务端错误 (Server Error)
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
               example:
                 status_code: 2001
                 status_msg: 系统错误
@@ -219,7 +230,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: 成功
           content:
             application/json:
@@ -266,7 +277,7 @@ paths:
                             description: 修改时间 毫秒级时间戳
                           language:
                             type: string
-                            description: 语言 
+                            description: 语言
                           cover_image:
                             type: string
                             description: 封面图
@@ -325,7 +336,18 @@ paths:
                       - author_info
                   status_code:
                     type: number
-                    description: 状态码
+                    description: |
+                      状态码
+                      | 代码  | 英文提示                                                               | 中文提示                     |
+                      |-------|--------------------------------------------------------------------------|------------------------------|
+                      | 2001  | system error                                                             | 系统异常                     |
+                      | 2002  | check your balance is insufficient. Please recharge in time              | 使用额度用尽，请充值         |
+                      | 0     | success                                                                  | 成功                         |
+                      | 4010  | no auth                                                                  | 没有权限                     |
+                      | 4011  | Authorization style invalid, start with Bearer                           | 权限头字段不对               |
+                      | 5201  | news page not found                                                      | 新闻页未找到                 |
+                      | 5202  | news detail not found                                                    | 详情页未找到                 |
+                      | 5203  | request error                                                            | 请求新闻数据失败             |
                   status_msg:
                     type: string
                     description: 状态信息
@@ -333,30 +355,30 @@ paths:
                   - data
                   - status_code
                   - status_msg
-        '401':
+        "401":
           description: 没有权限 (No Auth)
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
               example:
                 status_code: 4010
                 status_msg: 没有权限
-        '404':
+        "404":
           description: 详情页未找到 (News Detail Not Found)
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
               example:
                 status_code: 5202
                 status_msg: 新闻详情未找到
-        '500':
+        "500":
           description: 服务端错误 (Server Error)
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
               example:
                 status_code: 2001
                 status_msg: 系统错误
@@ -378,4 +400,4 @@ components:
     bearerAuth:
       type: http
       scheme: bearer
-      description: '[申请 apikey](https://ainvest.com)'
+      description: "[申请 apikey](https://ainvest.com)"
