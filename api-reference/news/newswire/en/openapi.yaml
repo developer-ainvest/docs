@@ -378,4 +378,4 @@ components:
     bearerAuth:
       type: http
       scheme: bearer
-      description: '[Apply for apikey](https://ainvest.com)'
+      description: '[Apply for apikey](https://ainvest-www.touzime.com/pricing/developer-manage/#api-key)'
