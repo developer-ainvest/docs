@@ -24,18 +24,107 @@
             "tab": "API Documentation",
             "pages": [
               "api-reference/general-en",
-              {
-                "group": "News",
-                "pages": [
-                  {
-                    "group": "Newswire",
-                    "pages": [
-                      "api-reference/news/newswire/en/page",
-                      "api-reference/news/newswire/en/detail"
-                    ]
-                  }
-                ]
-              }
+              {"group": "News", "pages": [
+                {"group": "Newswire", "pages": [
+                  "api-reference/news/newswire/en/page",
+                  "api-reference/news/newswire/en/detail"
+                ]},
+                {"group": "Articles", "pages": [
+                  "api-reference/news/articles/en/page",
+                  "api-reference/news/articles/en/detail"
+                ]}
+              ]},
+              {"group": "Filings", "pages": [
+                {"group": "SEC Filings", "pages": [
+                  "api-reference/filings/sec-filings/en/page"
+                ]}
+              ]},
+              {"group": "Pricing and Market Data", "pages": [
+                {"group": "Stocks", "pages": [
+                  "api-reference/market-data/stocks/en/tickers",
+                  "api-reference/market-data/stocks/en/trades-quotes",
+                  "api-reference/market-data/stocks/en/snapshot",
+                  "api-reference/market-data/stocks/en/technical-indicators"
+                ]},
+                {"group": "Bonds", "pages": [
+                  "api-reference/market-data/bonds/en/tickers",
+                  "api-reference/market-data/bonds/en/trades-quotes"
+                ]},
+                {"group": "Futures", "pages": [
+                  "api-reference/market-data/futures/en/contracts",
+                  "api-reference/market-data/futures/en/trades-quotes",
+                  "api-reference/market-data/futures/en/snapshot",
+                  "api-reference/market-data/futures/en/technical-indicators"
+                ]},
+                {"group": "Options", "pages": [
+                  "api-reference/market-data/options/en/contracts",
+                  "api-reference/market-data/options/en/trades-quotes",
+                  "api-reference/market-data/options/en/snapshot",
+                  "api-reference/market-data/options/en/technical-indicators"
+                ]},
+                {"group": "Forex", "pages": [
+                  "api-reference/market-data/forex/en/tickers",
+                  "api-reference/market-data/forex/en/trades-quotes",
+                  "api-reference/market-data/forex/en/snapshot",
+                  "api-reference/market-data/forex/en/technical-indicators"
+                ]},
+                {"group": "ETFs", "pages": [
+                  "api-reference/market-data/etf/en/tickers",
+                  "api-reference/market-data/etf/en/trades-quotes",
+                  "api-reference/market-data/etf/en/snapshot",
+                  "api-reference/market-data/etf/en/technical-indicators"
+                ]},
+                {"group": "Indices", "pages": [
+                  "api-reference/market-data/indices/en/tickers",
+                  "api-reference/market-data/indices/en/trades-values",
+                  "api-reference/market-data/indices/en/snapshot",
+                  "api-reference/market-data/indices/en/technical-indicators"
+                ]},
+                {"group": "Crypto", "pages": [
+                  "api-reference/market-data/crypto/en/tickers",
+                  "api-reference/market-data/crypto/en/trades-quotes",
+                  "api-reference/market-data/crypto/en/snapshot",
+                  "api-reference/market-data/crypto/en/technical-indicators"
+                ]}
+              ]},
+              {"group": "Company", "pages": [
+                {"group": "Financial Statement", "pages": [
+                  "api-reference/company/financial-statement/en/income-statement",
+                  "api-reference/company/financial-statement/en/balance-sheet",
+                  "api-reference/company/financial-statement/en/cash-flow-statement"
+                ]},
+                {"group": "Financial Metrics", "pages": [
+                  "api-reference/company/financial-metrics/en/financial-metrics"
+                ]},
+                {"group": "Insider Transactions", "pages": [
+                  "api-reference/company/insider-transactions/en/insider-transactions"
+                ]},
+                {"group": "Consensus", "pages": [
+                  "api-reference/company/consensus/en/wall-street-opinions"
+                ]}
+              ]},
+              {"group": "Estimates", "pages": [
+                "api-reference/estimates/en/target-price"
+              ]},
+              {"group": "Economy", "pages": [
+                {"group": "Macro Economy", "pages": [
+                  "api-reference/economy/en/macro-economy"
+                ]}
+              ]},
+              {"group": "Commodities", "pages": [
+                {"group": "Agriculture", "pages": [
+                  "api-reference/commodities/en/agriculture"
+                ]},
+                {"group": "Energy", "pages": [
+                  "api-reference/commodities/en/energy"
+                ]},
+                {"group": "Metal", "pages": [
+                  "api-reference/commodities/en/metals"
+                ]},
+                {"group": "Shipping", "pages": [
+                  "api-reference/commodities/en/shipping"
+                ]}
+              ]}
             ]
           },
           {
@@ -65,19 +154,107 @@
             "tab": "接口文档",
             "pages": [
               "api-reference/general-zh",
-              {
-                "group": "资讯",
-                "pages": [
-                  {
-                    "group": "快讯",
-                    "pages": [
-                      "api-reference/news/newswire/zh/page",
-                      "api-reference/news/newswire/zh/detail"
-                      
-                    ]
-                  }
-                ]
-              }
+              {"group": "资讯", "pages": [
+                {"group": "快讯", "pages": [
+                  "api-reference/news/newswire/zh/page",
+                  "api-reference/news/newswire/zh/detail"
+                ]},
+                {"group": "文章", "pages": [
+                  "api-reference/news/articles/zh/page",
+                  "api-reference/news/articles/zh/detail"
+                ]}
+              ]},
+              {"group": "披露文件", "pages": [
+                {"group": "SEC 披露", "pages": [
+                  "api-reference/filings/sec-filings/zh/page"
+                ]}
+              ]},
+              {"group": "市场数据", "pages": [
+                {"group": "股票", "pages": [
+                  "api-reference/market-data/stocks/zh/tickers",
+                  "api-reference/market-data/stocks/zh/trades-quotes",
+                  "api-reference/market-data/stocks/zh/snapshot",
+                  "api-reference/market-data/stocks/zh/technical-indicators"
+                ]},
+                {"group": "债券", "pages": [
+                  "api-reference/market-data/bonds/zh/tickers",
+                  "api-reference/market-data/bonds/zh/trades-quotes"
+                ]},
+                {"group": "期货", "pages": [
+                  "api-reference/market-data/futures/zh/contracts",
+                  "api-reference/market-data/futures/zh/trades-quotes",
+                  "api-reference/market-data/futures/zh/snapshot",
+                  "api-reference/market-data/futures/zh/technical-indicators"
+                ]},
+                {"group": "期权", "pages": [
+                  "api-reference/market-data/options/zh/contracts",
+                  "api-reference/market-data/options/zh/trades-quotes",
+                  "api-reference/market-data/options/zh/snapshot",
+                  "api-reference/market-data/options/zh/technical-indicators"
+                ]},
+                {"group": "外汇", "pages": [
+                  "api-reference/market-data/forex/zh/tickers",
+                  "api-reference/market-data/forex/zh/trades-quotes",
+                  "api-reference/market-data/forex/zh/snapshot",
+                  "api-reference/market-data/forex/zh/technical-indicators"
+                ]},
+                {"group": "ETF", "pages": [
+                  "api-reference/market-data/etf/zh/tickers",
+                  "api-reference/market-data/etf/zh/trades-quotes",
+                  "api-reference/market-data/etf/zh/snapshot",
+                  "api-reference/market-data/etf/zh/technical-indicators"
+                ]},
+                {"group": "指数", "pages": [
+                  "api-reference/market-data/indices/zh/tickers",
+                  "api-reference/market-data/indices/zh/trades-values",
+                  "api-reference/market-data/indices/zh/snapshot",
+                  "api-reference/market-data/indices/zh/technical-indicators"
+                ]},
+                {"group": "加密货币", "pages": [
+                  "api-reference/market-data/crypto/zh/tickers",
+                  "api-reference/market-data/crypto/zh/trades-quotes",
+                  "api-reference/market-data/crypto/zh/snapshot",
+                  "api-reference/market-data/crypto/zh/technical-indicators"
+                ]}
+              ]},
+              {"group": "公司", "pages": [
+                {"group": "财务报表", "pages": [
+                  "api-reference/company/financial-statement/zh/income-statement",
+                  "api-reference/company/financial-statement/zh/balance-sheet",
+                  "api-reference/company/financial-statement/zh/cash-flow-statement"
+                ]},
+                {"group": "财务指标", "pages": [
+                  "api-reference/company/financial-metrics/zh/financial-metrics"
+                ]},
+                {"group": "内部交易", "pages": [
+                  "api-reference/company/insider-transactions/zh/insider-transactions"
+                ]},
+                {"group": "一致预期", "pages": [
+                  "api-reference/company/consensus/zh/wall-street-opinions"
+                ]}
+              ]},
+              {"group": "估值预测", "pages": [
+                "api-reference/estimates/zh/target-price"
+              ]},
+              {"group": "宏观经济", "pages": [
+                {"group": "宏观经济", "pages": [
+                  "api-reference/economy/zh/macro-economy"
+                ]}
+              ]},
+              {"group": "大宗商品", "pages": [
+                {"group": "农产品", "pages": [
+                  "api-reference/commodities/zh/agriculture"
+                ]},
+                {"group": "能源", "pages": [
+                  "api-reference/commodities/zh/energy"
+                ]},
+                {"group": "金属", "pages": [
+                  "api-reference/commodities/zh/metals"
+                ]},
+                {"group": "航运", "pages": [
+                  "api-reference/commodities/zh/shipping"
+                ]}
+              ]}
             ]
           },
           {
