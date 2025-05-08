@@ -24,7 +24,7 @@
             "tab": "API Documentation",
             "pages": [
               "api-reference/general-en",
-              {"group": "News", "pages": [
+              {"icon":"fa-solid fa-newspaper","group": "News", "pages": [
                 {"group": "Newswire", "pages": [
                   "api-reference/news/newswire/en/page",
                   "api-reference/news/newswire/en/detail"
@@ -48,7 +48,9 @@
                 ]},
                 {"group": "Bonds", "pages": [
                   "api-reference/market-data/bonds/en/tickers",
-                  "api-reference/market-data/bonds/en/trades-quotes"
+                  "api-reference/market-data/bonds/en/trades-quotes",
+                  "api-reference/market-data/bonds/en/snapshot",
+                  "api-reference/market-data/bonds/en/technical-indicators"
                 ]},
                 {"group": "Futures", "pages": [
                   "api-reference/market-data/futures/en/contracts",
@@ -154,7 +156,7 @@
             "tab": "接口文档",
             "pages": [
               "api-reference/general-zh",
-              {"group": "资讯", "pages": [
+              {"icon":"fa-solid fa-newspaper","group": "资讯", "pages": [
                 {"group": "快讯", "pages": [
                   "api-reference/news/newswire/zh/page",
                   "api-reference/news/newswire/zh/detail"
@@ -177,14 +179,16 @@
                   "api-reference/market-data/stocks/zh/technical-indicators"
                 ]},
                 {"group": "债券", "pages": [
-                  "api-reference/market-data/bonds/zh/tickers",
-                  "api-reference/market-data/bonds/zh/trades-quotes"
-                ]},
-                {"group": "期货", "pages": [
-                  "api-reference/market-data/futures/zh/contracts",
+                  "api-reference/market-data/futures/zh/tickers",
                   "api-reference/market-data/futures/zh/trades-quotes",
                   "api-reference/market-data/futures/zh/snapshot",
                   "api-reference/market-data/futures/zh/technical-indicators"
+                ]},
+                {"group": "期货", "pages": [
+                  "api-reference/market-data/bonds/zh/contracts",
+                  "api-reference/market-data/bonds/zh/trades-quotes",
+                  "api-reference/market-data/bonds/zh/snapshot",
+                  "api-reference/market-data/bonds/zh/technical-indicators"
                 ]},
                 {"group": "期权", "pages": [
                   "api-reference/market-data/options/zh/contracts",
