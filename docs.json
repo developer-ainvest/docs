@@ -182,16 +182,16 @@
                   "api-reference/market-data/stocks/zh/technical-indicators"
                 ]},
                 {"group": "债券", "pages": [
-                  "api-reference/market-data/futures/zh/tickers",
-                  "api-reference/market-data/futures/zh/trades-quotes",
-                  "api-reference/market-data/futures/zh/snapshot",
-                  "api-reference/market-data/futures/zh/technical-indicators"
-                ]},
-                {"group": "期货", "pages": [
                   "api-reference/market-data/bonds/zh/tickers",
                   "api-reference/market-data/bonds/zh/trades-quotes",
                   "api-reference/market-data/bonds/zh/snapshot",
                   "api-reference/market-data/bonds/zh/technical-indicators"
+                ]},
+                {"group": "期货", "pages": [
+                  "api-reference/market-data/futures/zh/tickers",
+                  "api-reference/market-data/futures/zh/trades-quotes",
+                  "api-reference/market-data/futures/zh/snapshot",
+                  "api-reference/market-data/futures/zh/technical-indicators"
                 ]},
                 {"group": "期权", "pages": [
                   "api-reference/market-data/options/zh/tickers",
