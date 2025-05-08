@@ -24,7 +24,7 @@
             "tab": "API Documentation",
             "pages": [
               "api-reference/general-en",
-              {"icon":"fa-solid fa-newspaper","group": "News", "pages": [
+              {"group": "News", "pages": [
                 {"group": "Newswire", "pages": [
                   "api-reference/news/newswire/en/page",
                   "api-reference/news/newswire/en/detail"
@@ -156,7 +156,7 @@
             "tab": "接口文档",
             "pages": [
               "api-reference/general-zh",
-              {"icon":"fa-solid fa-newspaper","group": "资讯", "pages": [
+              {"group": "资讯", "pages": [
                 {"group": "快讯", "pages": [
                   "api-reference/news/newswire/zh/page",
                   "api-reference/news/newswire/zh/detail"
