@@ -53,13 +53,13 @@
                   "api-reference/market-data/bonds/en/technical-indicators"
                 ]},
                 {"group": "Futures", "pages": [
-                  "api-reference/market-data/futures/en/contracts",
+                  "api-reference/market-data/futures/en/tickers",
                   "api-reference/market-data/futures/en/trades-quotes",
                   "api-reference/market-data/futures/en/snapshot",
                   "api-reference/market-data/futures/en/technical-indicators"
                 ]},
                 {"group": "Options", "pages": [
-                  "api-reference/market-data/options/en/contracts",
+                  "api-reference/market-data/options/en/tickers",
                   "api-reference/market-data/options/en/trades-quotes",
                   "api-reference/market-data/options/en/snapshot",
                   "api-reference/market-data/options/en/technical-indicators"
@@ -188,13 +188,13 @@
                   "api-reference/market-data/futures/zh/technical-indicators"
                 ]},
                 {"group": "期货", "pages": [
-                  "api-reference/market-data/bonds/zh/contracts",
+                  "api-reference/market-data/bonds/zh/tickers",
                   "api-reference/market-data/bonds/zh/trades-quotes",
                   "api-reference/market-data/bonds/zh/snapshot",
                   "api-reference/market-data/bonds/zh/technical-indicators"
                 ]},
                 {"group": "期权", "pages": [
-                  "api-reference/market-data/options/zh/contracts",
+                  "api-reference/market-data/options/zh/tickers",
                   "api-reference/market-data/options/zh/trades-quotes",
                   "api-reference/market-data/options/zh/snapshot",
                   "api-reference/market-data/options/zh/technical-indicators"
