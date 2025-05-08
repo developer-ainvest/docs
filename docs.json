@@ -126,6 +126,9 @@
                 {"group": "Shipping", "pages": [
                   "api-reference/commodities/en/shipping"
                 ]}
+              ]},
+              {"group": "Financial Agent", "pages": [
+                "api-reference/ai-agent/en/aime"
               ]}
             ]
           },
@@ -258,6 +261,9 @@
                 {"group": "航运", "pages": [
                   "api-reference/commodities/zh/shipping"
                 ]}
+              ]},
+              {"group": "金融Agent", "pages": [
+                "api-reference/ai-agent/zh/aime"
               ]}
             ]
           },
