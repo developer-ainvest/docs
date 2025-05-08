@@ -78,7 +78,7 @@
                 ]},
                 {"group": "Indices", "pages": [
                   "api-reference/market-data/indices/en/tickers",
-                  "api-reference/market-data/indices/en/trades-values",
+                  "api-reference/market-data/indices/en/trades-quotes",
                   "api-reference/market-data/indices/en/snapshot",
                   "api-reference/market-data/indices/en/technical-indicators"
                 ]},
@@ -213,7 +213,7 @@
                 ]},
                 {"group": "指数", "pages": [
                   "api-reference/market-data/indices/zh/tickers",
-                  "api-reference/market-data/indices/zh/trades-values",
+                  "api-reference/market-data/indices/zh/trades-quotes",
                   "api-reference/market-data/indices/zh/snapshot",
                   "api-reference/market-data/indices/zh/technical-indicators"
                 ]},
