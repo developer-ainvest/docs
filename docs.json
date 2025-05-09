@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "AInvest Open Platform",
+  "name": "AInvest API",
   "colors": {
     "primary": "#165DFF",
     "light": "#165DFF",
@@ -9,7 +9,7 @@
   },
   "favicon": "/favicon.svg",
   "navigation": {
-    "languages": [
+    "groups": [
       {
         "language": "en",
         "tabs": [
@@ -283,20 +283,14 @@
     ]
   },
   "logo": {
-    "light": "/logo/logo.svg",
-    "dark": "/logo/logo.svg"
+    "light": "/images/logo.svg",
+    "dark": "/images/logo.svg"
   },
   "navbar": {
-    "links": [
-      {
-        "label": "Support",
-        "href": "mailto:developer@ainvest.com"
-      }
-    ],
     "primary": {
       "type": "button",
-      "label": "Homepage",
-      "href": "https://ainvest.com"
+      "label": "Get API key",
+      "href": "https://www.ainvest.com/"
     }
   },
   "footer": {
