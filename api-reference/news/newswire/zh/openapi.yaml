@@ -51,7 +51,24 @@ paths:
         - name: industry
           in: query
           required: false
-          description: 行业代码
+          description: |
+            行业代码
+            | 参数名称             | 描述                   |
+            |----------------------|------------------------|
+            | software             | 软件                   |
+            | tech_hardware        | 科技硬件               |
+            | chips                | 芯片                   |
+            | healthcare_equipment | 医疗保健设备           |
+            | pharma               | 制药                   |
+            | banks                | 银行                   |
+            | defense              | 国防                   |
+            | industrials          | 工业                   |
+            | consumer_durables    | 耐用消费品             |
+            | autos                | 汽车                   |
+            | staples_retail       | 日用必需品零售         |
+            | energy_equip_serv    | 能源设备与服务         |
+            | reits                | 房地产投资信托基金     |
+            | media                | 媒体                   |
           schema:
             type: string
             example: software

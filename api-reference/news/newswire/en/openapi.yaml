@@ -51,7 +51,24 @@ paths:
         - name: industry
           in: query
           required: false
-          description: Industry code
+          description: |
+            Industry code
+            | Parameter Name       | Description            |
+            |----------------------|------------------------|
+            | software             | Software               |
+            | tech_hardware        | Tech Hardware          |
+            | chips                | Chips                  |
+            | healthcare_equipment | Healthcare Equipment   |
+            | pharma               | Pharma                 |
+            | banks                | Banks                  |
+            | defense              | Defense                |
+            | industrials          | Industrials            |
+            | consumer_durables    | Consumer Durables      |
+            | autos                | Autos                  |
+            | staples_retail       | Staples Retail         |
+            | energy_equip_serv    | Energy Equip-Serv      |
+            | reits                | REITs                  |
+            | media                | Media                  |
           schema:
             type: string
             example: software
