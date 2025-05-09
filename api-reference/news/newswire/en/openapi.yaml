@@ -27,16 +27,16 @@ paths:
           required: false
           description: |
             Defaults to "all"
-            | Parameter Name | Description |
-            |----------------|-------------|
-            | pro | Paid content |
-            | latest | Full content |
-            | markets | Markets |
-            | stock_ideas | Stock insights |
-            | economy | Economy |
-            | pre_market | Pre-market |
-            | earningscall | Earnings call |
-            | all | All content |
+            | Parameter Name | Description    |
+            |----------------|----------------|
+            | pro            | Paid content   |
+            | latest         | Full content   |
+            | markets        | Markets        |
+            | stock_ideas    | Stock insights |
+            | economy        | Economy        |
+            | pre_market     | Pre-market     |
+            | earningscall   | Earnings call  |
+            | all            | All content    |
           schema:
             type: string
             example: important
